@@ -20,6 +20,22 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/product/start")
+    public String initialProduct(){
+        Product p = new Product();
+        p.setName("TEST");
+        p.setPicture("https://off.com.ph/-/media/images/off/ph/products-en/update-983/plp/overtime-group-plp.png");
+        p.setDescription("Testdesc");
+        p.setUnit("Unit");
+        p.setType("food");
+        p.setAmount(1);
+        p.setBuying_price(10.0);
+        p.setSelling_price(20.0);
+
+        productService.addProduct(p);
+        return p.getId().toString();
+    }
+
     @PostMapping("/product")
     public ResponseEntity<String> addProduct(@RequestBody Product product) {
         try {

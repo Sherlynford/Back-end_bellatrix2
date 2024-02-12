@@ -1,5 +1,6 @@
 package com.example.backend_app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Product {
     private Double selling_price;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<ProductAccount> productAccounts;
     
 }

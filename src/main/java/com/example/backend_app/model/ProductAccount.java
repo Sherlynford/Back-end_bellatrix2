@@ -2,6 +2,8 @@ package com.example.backend_app.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,8 +15,9 @@ public class ProductAccount {
     @GeneratedValue
     private Long accountId;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @JsonBackReference
     private Product product;
 
     private String unit;
@@ -26,5 +29,6 @@ public class ProductAccount {
     private Integer remainQuantity = 0;
 
     @OneToMany(mappedBy = "productAccount", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Transaction> transactions;
 }
